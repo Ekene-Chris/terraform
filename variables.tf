@@ -15,6 +15,11 @@ variable "virtual_network_name" {
   description = "terraform-vnet"
   default     = "chris-vnet"
 }
+variable "kubernetes_name" {
+  type        = string
+  description = "kubernetes cluster"
+  default     = "terraform-cluster"
+}
 
 variable "subnet_name" {
   type        = string

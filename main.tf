@@ -125,4 +125,37 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   tags = {
     environment = "production"
   }
+
+  resource "azurerm_kubernetes_cluster" "kubernetes" {
+  name                = var.kubernetes_name
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  dns_prefix          = "terraformcluster"
+
+  default_node_pool {
+    name       = "default"
+    node_count = 1
+    vm_size    = "Standard_D2_v2"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = {
+    Environment = "Production"
+  }
+}
+
+resource "azurerm_kubernetes_cluster_node_pool" "example" {
+  name                  = "internal"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.kubernetes.id
+  vm_size               = "Standard_DS2_v2"
+  node_count            = 2
+  mode                  = "User"
+
+  tags = {
+    Environment = "Production"
+  }
+}
 }
