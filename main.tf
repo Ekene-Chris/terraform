@@ -125,8 +125,9 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   tags = {
     environment = "production"
   }
+}
 
-  resource "azurerm_kubernetes_cluster" "kubernetes" {
+resource "azurerm_kubernetes_cluster" "kubernetes" {
   name                = var.kubernetes_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -145,7 +146,8 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   tags = {
     Environment = "Production"
   }
-}
+  }
+
 
 resource "azurerm_kubernetes_cluster_node_pool" "example" {
   name                  = "internal"
@@ -157,5 +159,4 @@ resource "azurerm_kubernetes_cluster_node_pool" "example" {
   tags = {
     Environment = "Production"
   }
-}
 }
