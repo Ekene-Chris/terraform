@@ -1,3 +1,5 @@
+
+
 resource "aws_vpc" "ekene-chris" {
   cidr_block = "172.16.0.0/16"
 
@@ -46,8 +48,9 @@ resource "aws_network_interface" "ekene-chris" {
 }
 
 resource "aws_instance" "ekene-chris" {
-  ami           = "ami-005e54dee72cc1d00" # us-west-2
-  instance_type = "t2.micro"
+  ami           = var.ami
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.gateway-subnet-one
 
   network_interface {
     network_interface_id = aws_network_interface.ekene-chris.id
