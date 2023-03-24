@@ -15,3 +15,18 @@ variable "virtual_network_name" {
   description = "terraform-vnet"
   default     = "chris-vnet"
 }
+
+variable "region" {
+  type        = string
+  default     = "us-west-2"
+}
+
+variable "ami" {
+  type        = string
+  default     = "ami-0b029b1931b347543"
+}
+
+variable "instance_type" {
+  type        = string
+  default     = "t2.micro"
+}
